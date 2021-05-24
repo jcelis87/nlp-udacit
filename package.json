@@ -1,0 +1,24 @@
+{
+  "name": "nlp",
+  "version": "1.0.0",
+  "description": "NLP for Udacity",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --config webpack.config.js"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "JMC",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
