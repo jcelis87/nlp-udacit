@@ -1,10 +1,36 @@
 const dotenv = require('dotenv');
 dotenv.config({path: './../../.env' });
 
+const express = require('express');
+const cors = require('cors');
+
 const fetch = require('node-fetch');
 var FormData = require('form-data');
 
 console.log(process.env.API_KEY);
+
+//Start up the server
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, ()=>{
+    console.log(`Server started on port ${PORT}`);
+});
+
+//Cors for Cross Origin Allowance
+app.use(cors());
+
+//Initialize the main project folder using dist forlder from Webpack
+app.use(express.static('dist'));
+//replaces body parser
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.post('/send-url', (req, res) =>{
+    console.log(req.body);
+    res.send({'message': 'hola mundo'});
+});
+
 
 
 const formdata = new FormData();
