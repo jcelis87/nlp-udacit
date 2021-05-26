@@ -4,9 +4,12 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
     mode: "development",
     entry: "./src/client/index.js",
+    //devtool: 'none',
+    //stats: 'verbose',
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -23,7 +26,17 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ["style-loader", "css-loader", "sass-loader"]
-            }
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    // options: {
+                    //     presets: ['@babel/preset-env']
+                    // }
+                }
+            },
         ]
     },
     watch: true,

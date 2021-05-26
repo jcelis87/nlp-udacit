@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({path: './../../.env' });
+dotenv.config();
 
 const express = require('express');
 const cors = require('cors');
@@ -26,20 +26,21 @@ app.use(express.static('dist'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.post('/send-url', (req, res) =>{
+app.post('/send-url', async (req, res) =>{
     console.log(req.body.url);
+    console.log('HoLSDFG');
 
     const text = req.body.url;
-    const analysis = nlpAnalysis (process.env.API_KEY, text, 'en')
+    const analysis = await nlpAnalysis (process.env.API_KEY, text, 'en');
 
-    console.log(analysis);
-    
     res.send(analysis);
-    //res.send({URL:req.body.url});
 });
 
-function nlpAnalysis  (APIKEY, text2Analyze, lang) {
+async function nlpAnalysis  (APIKEY, text2Analyze, lang) {
     
+    console.log(APIKEY);
+    console.log(text2Analyze);
+
     const formdata = new FormData();
     formdata.append("key", APIKEY);
     formdata.append("txt", text2Analyze);
@@ -51,17 +52,13 @@ function nlpAnalysis  (APIKEY, text2Analyze, lang) {
         redirect: 'follow'
     };
 
-    const analysis = getNLPAnalysis(requestOptions)
-    .then(response => console.log(response))
-    .catch(error => console.log('error', error));
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)    
+    const status =  await response.status;
+    const body =  await response.json();
 
-    return analysis;
+    console.log(status);
+    console.log(body);
+
+    return body;
 };
 
-const  getNLPAnalysis = async (requestOptions) =>{
-    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-
-    const analysis = await response.json()
-
-    return analysis;
-};

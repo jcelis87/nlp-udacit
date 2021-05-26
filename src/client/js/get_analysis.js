@@ -1,11 +1,13 @@
-const form = document.getElementById('input-form');
 
+import {injectResults} from './inject_results'
 
-
-//How to use env var here?
 const URL = 'http://localhost:5000/send-url';
 
-const   checkURL = async (e) => {
+const excludedProperties = ['sentence_list', 'sentimented_concept_list',
+'sentimented_entity_list', 'status',                                    
+];
+
+export const checkURL = async (e) => {
     
     const url2analize = document.getElementById('url-input').value;
     e.preventDefault();
@@ -22,9 +24,8 @@ const   checkURL = async (e) => {
     const sentimentResponse = await response.json();
 
     console.log(sentimentResponse);
+    injectResults(sentimentResponse, excludedProperties);
+
     return sentimentResponse;
 };
-
-form.addEventListener('submit', checkURL);
-
 
