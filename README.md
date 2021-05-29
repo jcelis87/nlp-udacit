@@ -25,5 +25,5 @@ Its main components:
 
 ### Tests
 - Tests: ```npm run jest```
-- Development: ```npm run dev```
+
 
