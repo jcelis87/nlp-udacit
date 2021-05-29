@@ -6,23 +6,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
     </head>
-    <body>
+    <body class="main-container">
         <header>
+            <div class="author">
+                <h1>Natural Language Processing</h1>
+            </div>
         </header>
-        <main>
-            <section class="input">
-                <form class="" id="input-form">
+        <main class="container">
+            <h1>Try an URL that contains text</h1>
+            <section class="input sub-container">
+                <form class="input-form" id="input-form">
                     <label for="">URL: <input id="url-input" type="text"></label>
                     <button type=" submit">Submit URL </button>
                 </form>
             </section>
-            <section class="output">
-                <strong>Form Results:</strong>
-                <div id="results">
+            <section class="output sub-container">
+                <strong>Results:</strong>
+                <div class="result-list" id="results">
                 </div>
-
             </section>
         </main>
         <!-- <script src="../index.js" type="module"></script> -->
+        <footer class="container">
+            <div class="author">
+                <span>Jose Celis</span>
+            </div>
+        </footer>
     </body>
+
 </html>

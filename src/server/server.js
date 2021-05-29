@@ -27,14 +27,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.post('/send-url', async (req, res) =>{
-    console.log(req.body.url);
-    console.log('HoLSDFG');
 
     const text = req.body.url;
     const analysis = await nlpAnalysis (process.env.API_KEY, text, 'en');
 
     res.send(analysis);
 });
+
 
 async function nlpAnalysis  (APIKEY, text2Analyze, lang) {
     
@@ -43,7 +42,7 @@ async function nlpAnalysis  (APIKEY, text2Analyze, lang) {
 
     const formdata = new FormData();
     formdata.append("key", APIKEY);
-    formdata.append("txt", text2Analyze);
+    formdata.append("url", text2Analyze);
     formdata.append("lang", lang);  // 2-letter code, like en es fr ...
 
     const requestOptions = {
